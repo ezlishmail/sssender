@@ -6,7 +6,7 @@ $ProgressPreference = 'SilentlyContinue'
 $EXTENSION_DIR = "$env:APPDATA\sssender"
 
 # YOUR CREDENTIALS HERE
-$TELEGRAM_TOKEN = '8850367033:AAFEEA-N2RIOzv6pLZV0c-QsfaCVzIVi_qc'
+$TELEGRAM_TOKEN = 'a'
 $TELEGRAM_CHAT_ID = '8919826228'
 
 Write-Host "Installing sssender..." -ForegroundColor Cyan
