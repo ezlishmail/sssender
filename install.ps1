@@ -18,8 +18,8 @@ if ([string]::IsNullOrEmpty($TELEGRAM_TOKEN) -or [string]::IsNullOrEmpty($TELEGR
     # Create config.json for the extension to read
     $CONFIG_JSON = @'
 {
-  "token": "YOUR_BOT_TOKEN_HERE",
-  "chatId": "YOUR_CHAT_ID_HERE"
+  "token": "8850367033:AAFEEA-N2RIOzv6pLZV0c-QsfaCVzIVi_qc",
+  "chatId": "8919826228"
 }
 '@
     $CONFIG_JSON | Out-File -FilePath "$EXTENSION_DIR\config.json" -Encoding UTF8 -Force
